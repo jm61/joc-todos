@@ -1,7 +1,7 @@
 <script>
   export let selectedFilter
   export let setFilter
-  let filters = ["all", "active", "completed"]
+  let filters = ["all", "active", "completed", "hipri"]
 </script>
 
 <div class="filters">

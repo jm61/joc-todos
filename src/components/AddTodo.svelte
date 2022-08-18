@@ -2,11 +2,14 @@
   export let addTodo
   export let toggleCompleted
   export let todosCount
+  //$: console.log(high)
 
   let todo = ""
+  let high = false
   function handleSubmit() {
-    addTodo(todo)
+    addTodo(todo, high)
     todo = ""
+    high = false
   }
 </script>
 
@@ -18,22 +21,44 @@
       class="<!-- toggle-all -->"
       on:click={toggleCompleted}
     />
-    <label aria-label="Mark all as complete" for="toggle-all">
+    <label
+      title="Mark all as complete"
+      aria-label="Mark all as complete"
+      for="toggle-all"
+    >
       Mark all as complete
     </label>
   {/if}
   <!-- svelte-ignore a11y-autofocus -->
-  <input
-    id="new-todo"
-    class="new-todo"
-    placeholder="What needs to be done?"
-    type="text"
-    autofocus
-    bind:value={todo}
-  />
+  <div class="contForm">
+    <input
+      id="new-todo"
+      class="new-todo"
+      placeholder="What needs to be done?"
+      type="text"
+      autofocus
+      bind:value={todo}
+    />
+    <small><label for="hiprio">High </label></small>
+    <input
+      class="high"
+      type="checkbox"
+      name="hiprio"
+      id="hiprio"
+      bind:checked={high}
+    />
+  </div>
 </form>
 
 <style>
+  .contForm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .high {
+    margin: 0 0.5rem 0 0.5rem;
+  }
   .toggle-all {
     width: 1px;
     height: 1px;

@@ -17,17 +17,22 @@
   $: filteredTodos = filterTodos($todos, selectedFilter)
   $: completedTodos = $todos.filter(todo => todo.completed).length
   $: duration = filtering ? 0 : 250
+  // debugging
+  //$: console.log(filteredTodos)
 
   function randomId() {
     return Math.random().toString(16).slice(2)
   }
 
-  /** @param {Object} todo */
-  function addTodo(todo) {
+  /** @param {Object} todo
+   * @param {boolean} high
+   */
+  function addTodo(todo, high) {
     let newTodo = {
       id: randomId(),
       text: todo,
-      completed: false
+      completed: false,
+      high: high
     }
     $todos = [...$todos, newTodo]
   }
@@ -59,7 +64,7 @@
    */
   function editTodo(id, newTodo) {
     let currentTodo = $todos.findIndex(todo => todo.id === id)
-    todos[currentTodo].text = newTodo
+    $todos[currentTodo].text = newTodo
   }
 
   /** @param {String} newFilter*/
@@ -82,6 +87,8 @@
         return todos.filter(todo => !todo.completed)
       case "completed":
         return todos.filter(todo => todo.completed)
+      case "hipri":
+        return todos.filter(todo => todo.high)
     }
   }
   function clearCompleted() {

@@ -20,6 +20,7 @@
     const pressedKey = event.key
     const targetElement = event.target
     let newTodo = targetElement.value
+    console.log(newTodo)
 
     switch (pressedKey) {
       case "Enter":
@@ -58,6 +59,9 @@
       class:completed={todo.completed}
       on:dblclick={toggleEdit}>{todo.text}</span
     >
+    <span on:dblclick={toggleEdit} class="hideHigh" class:showHigh={todo.high}
+      >&#9889;</span
+    >
     <button
       aria-label="Remove todo"
       class="remove"
@@ -78,6 +82,17 @@
 </li>
 
 <style>
+  .hideHigh {
+    display: none;
+  }
+  .showHigh {
+    position: absolute;
+    top: 24px;
+    right: 30px;
+    display: block;
+    font-size: 1rem;
+    padding: 0 0.2rem 0 0.2rem;
+  }
   .todo {
     font-size: var(--font-24);
     font-weight: 400;
